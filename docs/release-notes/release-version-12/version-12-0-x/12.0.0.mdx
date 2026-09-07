@@ -82,6 +82,10 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Design token highlighting and templates in Style Workspace <Pill type="mobile" />
 
         Style Workspace now highlights components using a selected design token, adds a menu-dropdown template for native mobile projects, and removes extraneous grid overlays from the canvas and mobile index file.
+
+      - ### WMX component preview in React Preview <Pill type="web" />
+
+        React Preview now supports previewing WMX components, using a centralized preview model.
     </Accordian>
 
     <Accordian title="Backend">
@@ -212,6 +216,14 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### WaveMaker Assistant is now the default assistant
 
         WaveMaker Assistant is now the default assistant for new conversations, replacing WaveMaker Agent, and the "(BETA)" label has been removed from its name.
+
+      - ### Per-request LLM model override in AG-UI API
+
+        The AG-UI WebSocket run API now accepts a per-request LLM model override (`llm_model_id` or `llm_config`), applied to the run and every delegated sub-agent.
+
+      - ### HQL query support for AI-created queries
+
+        WaveMaker Agent can now create HQL queries in addition to native SQL queries.
     </Accordian>
 
     <Accordian title="Product Ecosystem">
@@ -358,6 +370,10 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Image input support for A2A agent requests
 
         A2A clients can now include images in agent requests, either as a pre-uploaded file reference or as inline base64-encoded data.
+
+      - ### Pull-to-refresh update property for variables
+
+        Service, CRUD, and Live variables now support a `pulltorefreshUpdate` property.
     </Accordian>
 
     <Accordian title="Platform">
@@ -452,6 +468,10 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Per-app log isolation for the rescue agent
 
         Each previewed app now writes to its own log file instead of a shared one, so the diagnostic (rescue) agent can reliably isolate that app's errors.
+
+      - ### Skipped Angular codegen on preview events
+
+        Project preview no longer triggers an unnecessary Angular code-generation pass.
     </Accordian>
   </TabItem>
 
@@ -744,6 +764,62 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Header tab rendering on Linux
 
         Fixed a header tab border rendering incorrectly on Linux and at reduced zoom levels.
+
+      - ### DataTable inline-edit validators skipped in React <Pill type="web" />
+
+        Fixed DSL field validators (Required, Min/Max Value, RegExp/Email, Min/Max Date/Time) not being triggered when saving a new row via DataTable Inline Edit in React mode.
+
+      - ### Console errors opening a list row's details <Pill type="web" />
+
+        Fixed console errors when clicking a row to view its details in a list view, caused by an undefined toaster-position reference.
+
+      - ### Hierarchy node moves on menu selection <Pill type="web" />
+
+        Fixed a hierarchy node shifting position when a menu item was selected from within it.
+
+      - ### Status column color missing on page 2 <Pill type="web" />
+
+        Fixed the Status column's background color not showing after navigating to a second page using table pagination.
+
+      - ### Order Management Workflow tab layout <Pill type="web" />
+
+        Fixed checkbox and text placement in the Order Management Workflow tab of the Additional Attributes dialog.
+
+      - ### Crash adding assets via checkbox dialog <Pill type="web" />
+
+        Fixed a crash when selecting a checkbox in the Assets section's Add dialog.
+
+      - ### Deployment-only styling gap in header and nav <Pill type="web" />
+
+        Fixed some header and left-navigation styles not applying in React deployment, while working correctly in React Preview.
+
+      - ### Table alignment in Source Offers dialog <Pill type="web" />
+
+        Fixed table alignment breaking in the Source Offers dialog.
+
+      - ### Preview step data missing in view mode <Pill type="web" />
+
+        Fixed preview-step data not rendering when navigating to a record's view mode from a list view row.
+
+      - ### Wrong value shown after selecting Catalog Version <Pill type="web" />
+
+        Fixed the Export dialog showing Markup instead of the selected Catalog Version.
+
+      - ### Character count shown in read-only view <Pill type="web" />
+
+        Fixed a text area's character-count helper text showing in read-only View mode.
+
+      - ### Row selection checkbox fails with error <Pill type="web" />
+
+        Fixed individual table rows failing to select via their checkbox, caused by an undefined row-handler reference.
+
+      - ### Dynamic tab content not loading <Pill type="web" />
+
+        Fixed dynamic tab content failing to load and throwing a console error when a tab is selected.
+
+      - ### Variants step order in product offer wizard <Pill type="web" />
+
+        Fixed the Variants step being added at the end of the wizard instead of immediately after the General step.
     </Accordian>
 
     <Accordian title="Backend">
@@ -782,6 +858,22 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Callback not saved to variables.json
 
         Fixed a success or error callback sometimes being added to the page script but not saved to `variables.json` when added to an existing variable.
+
+      - ### Swagger re-import spinner never completes
+
+        Fixed the Swagger re-import spinner continuing to load indefinitely after the import completed successfully.
+
+      - ### CRUD endpoints not selectable for API variable
+
+        Fixed being unable to select CRUD endpoints while creating an API variable.
+
+      - ### REST variable input fields lost on reopen
+
+        Fixed a Web Service (REST) variable's configured input fields not showing when the variable was reopened.
+
+      - ### Multiple REST query parameter values dropped
+
+        Fixed multiple values for the same REST API query parameter not all being sent in Web Projects.
     </Accordian>
 
     <Accordian title="Platform">
@@ -905,6 +997,38 @@ For details about the technology stack upgrades, refer to [Technology Stack](/te
       - ### Accept and connect timeout regression
 
         Fixed a shared 300-second timeout incorrectly applying to connection attempts, causing dead Studio hosts to hang workers for 5 minutes with no surfaced error.
+
+      - ### Internal text leaking from background tasks
+
+        Fixed internal compaction text leaking into a background task's visible output, and its status indicator appearing outside that task's own card.
+
+      - ### Draft restore and base tracking errors
+
+        Fixed incorrect restore behavior and failed base lookups after combinations of accepting, rejecting, and syncing draft changes with Studio, by tracking each action with its own marker instead of a single shared pointer.
+
+      - ### Stale project-template cache after migration
+
+        Fixed a project continuing to route through its old template for up to 30 minutes after being migrated to the latest template.
+
+      - ### Context compaction triggered too late
+
+        Fixed context compaction triggering later than intended (or not at all) for agents with a large system prompt or many tools, by counting their real token usage instead of just the conversation messages.
+
+      - ### Context size not shown for sub-agents
+
+        Fixed the context-size indicator not appearing for delegated sub-agents and being misattributed to the wrong run.
+
+      - ### Mismatched compaction and cancel indicators
+
+        Fixed the AI chat being unable to reliably match a compaction or cancel indicator's start to its own completion when more than one occurred in the same run.
+
+      - ### Misleading tool suggestion in error message
+
+        Removed a misleading suggestion to try an alternate tool from the AI Assistant's file-write error message, since the suggested alternatives fail the same way.
+
+      - ### React Native preview build memory failures <Pill type="mobile" />
+
+        Fixed React Native preview builds intermittently failing with out-of-memory or `esbuild not found` errors caused by unnecessary `npm install` reruns on unchanged projects, cutting unchanged build time from about 2m47s to 23s.
     </Accordian>
 
     <Accordian title="Product Ecosystem">
